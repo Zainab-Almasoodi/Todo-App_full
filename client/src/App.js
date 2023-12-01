@@ -12,8 +12,8 @@ import {
 
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
-
+import Dashboard from "./components/dashboard/Dashboard";
+import Landing from "./components/Landing";
 //toast.configure();
 
 function App() {
@@ -30,7 +30,7 @@ const isAuth = async () => {
    try {
     const response =await fetch("http://localhost:5000/auth/is-verify",{
       method:"GET",
-      headers:{ jwt_token: localStorage.token}
+      headers:{ token: localStorage.token}
     });
 
     const parseRes = await response.json();
@@ -54,6 +54,15 @@ const isAuth = async () => {
       <Router>
         <div className="container">
           <Routes>
+          <Route
+              path="/"
+              element={!isAuthenticated ? ( 
+                  <Landing />
+                  ) : (
+                    <Navigate to="/dashboard" />
+                  )
+              }
+            />
             <Route
               path="/login"
               element={!isAuthenticated ? ( 

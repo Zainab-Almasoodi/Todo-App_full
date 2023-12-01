@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
   try {
 
     // Get token from header
-  const token = req.header("jwt_token");
+  const token = req.header("token");
 
   // Check if not token
   if (!token) {
